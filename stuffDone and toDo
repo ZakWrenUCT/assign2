@@ -1,0 +1,4 @@
+- Add listeners for start, pause, quit
+- Sync getters and setter for score
+- animate words
+- concurrancy
