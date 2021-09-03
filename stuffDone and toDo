@@ -1,4 +1,18 @@
-- Add listeners for start, pause, quit
-- Sync getters and setter for score
-- animate words
+TODO
 - concurrancy
+- Score appears as pop up in center of screen
+
+DONE
+-Added quit button
+-Sync all Score get and set
+-Score into atomic ints
+-start Thread
+-implemented pause button
+-animate words
+-implement listeners for start, pause, quit
+-Add speed selection
+
+UNIMPLEMENTED STUFF
+    Word Panel
+        -CountDownLatch
+        -Listeners
