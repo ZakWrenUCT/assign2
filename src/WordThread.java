@@ -14,7 +14,6 @@ public class WordThread extends Thread {
         word.drop(word.getSpeed() / (((5 - WordApp.speedMod) * 20) + 200));
       } else {
         WordApp.score.caughtWord(input.length());
-        System.out.println(input);
         word.resetWord();
       }
       try {

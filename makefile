@@ -3,8 +3,9 @@
 .SUFFIXES: .java .class
 
 PKG =
-BIN = ./bin/
+#BIN = ./out/production/assign2/
 SRC = ./src/
+BIN = ./bin/
 FLAG = -g -d $(BIN) -cp $(SRC)
 COMPILE = javac $(FLAG)
 EMPTY =
@@ -34,5 +35,5 @@ V1=
 V2=
 V3=
 run:
-	java -cp ./bin Main ${V1} ${V2} ${V3}
-# make run V1=sampleInput100.txt V2=35 V3=out.txt
+	java -cp ./bin WordApp ${V1} ${V2} ${V3}
+# make run V1=5 V2=5 V3=example_dict.txt

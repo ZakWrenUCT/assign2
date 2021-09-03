@@ -58,7 +58,6 @@ public class WordPanel extends JPanel implements Runnable {
 
   public void run() {
     // Code to animate this.
-    System.out.println('a');
     while (!WordApp.done || !endGame()) {
       while (!WordApp.paused) {
         WordThread[] WordThreads = new WordThread[noWords];
@@ -85,7 +84,7 @@ public class WordPanel extends JPanel implements Runnable {
         System.out.println("Score:" + WordApp.score.getScore());
         WordApp.awaitingRestart = true;
         WordApp.paused = true;
-        WordApp.score.resetScore();
+        WordApp.score.resetScoreNoUp();
       }
     }
   }

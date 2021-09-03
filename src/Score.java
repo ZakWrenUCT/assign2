@@ -47,6 +47,11 @@ public class Score {
     gameScore = new AtomicInteger(0);
     updateScore();
   }
+  public synchronized void resetScoreNoUp() {
+    caughtWords = new AtomicInteger(0);
+    missedWords = new AtomicInteger(0);
+    gameScore = new AtomicInteger(0);
+  }
 
   public static synchronized void updateScore() {
     WordApp.caught.setText("Caught: " + WordApp.score.getCaught() + "    ");
