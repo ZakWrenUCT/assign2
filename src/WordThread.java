@@ -11,19 +11,20 @@ public class WordThread extends Thread {
   public void run() {
     if (!word.dropped()) {
       if (!word.matchWord(input)) {
+        //set absolute fall rate
         word.drop(word.getSpeed() / (((5 - WordApp.speedMod) * 20) + 200));
       } else {
         WordApp.score.caughtWord(input.length());
         word.resetWord();
       }
       try {
-        Thread.sleep(15);
-      } catch (InterruptedException error) {
-        System.out.println(error);
+        Thread.sleep(15);//length of each cycle
+      } catch (InterruptedException e) {
+        e.printStackTrace();
       }
     } else {
-      WordApp.score.missedWord();
       word.resetWord();
+      WordApp.score.missedWord();
     }
   }
 }

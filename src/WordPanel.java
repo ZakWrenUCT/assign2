@@ -22,26 +22,25 @@ public class WordPanel extends JPanel implements Runnable {
     g.setFont(new Font("Helvetica", Font.PLAIN, 26));
     // Draw the words.
     // Animation must be added
-    if (!done) {
+    if (!(done || gameOver()) ){
       for (int i = 0; i < noWords; i++) {
         g.drawString(words[i].getWord(), words[i].getX(), words[i].getY());
       }
     }
   }
 
-  WordPanel(WordRecord[] wds, int maxY) {
-    this.words = new WordRecord[wds.length];
-    for (int i = 0; i < wds.length; i++) {
-      this.words[i] = new WordRecord(wds[i]);
+  WordPanel(WordRecord[] words, int maxY) {
+    //initialize wordRecord array
+    this.words = new WordRecord[words.length];
+    for (int i = 0; i < words.length; i++) {
+      this.words[i] = new WordRecord(words[i]);
     }
-
     noWords = words.length;
     done = false;
     this.maxY = maxY;
   }
 
   public void start() {
-    done = false;
     for (WordRecord w : words) {
       w.resetWord();
     }
@@ -50,15 +49,16 @@ public class WordPanel extends JPanel implements Runnable {
       anime = new Thread(this);
       anime.start();
     }
+    done = false;
   }
 
-  public boolean endGame() {
+  public boolean gameOver() {
     return WordApp.score.getTotal() >= WordApp.totalWords;
   }
 
   public void run() {
     // Code to animate this.
-    while (!WordApp.done || !endGame()) {
+    while (!WordApp.done || !gameOver()) {
       while (!WordApp.paused) {
         WordThread[] WordThreads = new WordThread[noWords];
         for (int i = 0; i < noWords; i++) {
@@ -71,14 +71,15 @@ public class WordPanel extends JPanel implements Runnable {
           }
           repaint();
         }
-        if (WordApp.done || endGame()) {
+        if (WordApp.done || gameOver()) {
           break;
         }
       }
-      if ((WordApp.done || endGame()) && !WordApp.awaitingRestart) {
+      if ((WordApp.done || gameOver()) && !WordApp.awaitingRestart) {
+        //GameOver reinitialize
         WordApp.textEntry.setEnabled(false);
         WordApp.textEntry.setText("GAME OVER");
-        System.out.println("Game Over!");
+        System.out.println("GAME OVER");
         System.out.println("Caught: " + WordApp.score.getCaught());
         System.out.println("Missed:" + WordApp.score.getMissed());
         System.out.println("Score:" + WordApp.score.getScore());

@@ -4,7 +4,6 @@ import java.util.Scanner;
 import javax.swing.*;
 
 public class WordApp {
-
   // shared variables
   static int noWords = 4;
   static int totalWords;
@@ -19,7 +18,7 @@ public class WordApp {
   static volatile boolean done; //must be volatile
   static volatile boolean awaitingRestart = false;
   static volatile boolean paused = false;
-  static Score score = new Score();
+  static final Score score = new Score();
 
   static WordPanel w;
   static JFrame frame;
@@ -76,7 +75,7 @@ public class WordApp {
 
     b = new JPanel();
     b.setLayout(new BoxLayout(b, BoxLayout.LINE_AXIS));
-
+//Allows user to change speed of falling words
     speedUp.addActionListener(
       e -> {
         if (speedMod < 9) {
@@ -173,7 +172,6 @@ public class WordApp {
     WordRecord.dict = dict; //set the class dictionary for the words.
     words = new WordRecord[noWords]; //shared array of current words
     int x_inc = frameX / noWords;
-
     //initialize shared array of current words
     for (int i = 0; i < noWords; i++) {
       words[i] = new WordRecord(dict.getNewWord(), i * x_inc, yLimit);
